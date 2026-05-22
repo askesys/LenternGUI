@@ -1,0 +1,160 @@
+{
+  "ingredients": [
+    {
+      "id": "buckwheat",
+      "name": "Buckwheat",
+      "category": "grains",
+      "tags": ["grain", "slavic_staple", "fasting_friendly"]
+    },
+    {
+      "id": "rice",
+      "name": "Rice",
+      "category": "grains",
+      "tags": ["grain", "basic_staple", "fasting_friendly"]
+    },
+    {
+      "id": "barley",
+      "name": "Barley",
+      "category": "grains",
+      "tags": ["grain", "traditional", "fasting_friendly"]
+    },
+    {
+      "id": "oats",
+      "name": "Oats",
+      "category": "grains",
+      "tags": ["grain", "breakfast", "fasting_friendly"]
+    },
+    {
+      "id": "potato",
+      "name": "Potato",
+      "category": "vegetables",
+      "tags": ["starch", "filling", "fasting_friendly"]
+    },
+    {
+      "id": "cabbage",
+      "name": "Cabbage",
+      "category": "vegetables",
+      "tags": ["slavic_staple", "fermentable", "fasting_friendly"]
+    },
+    {
+      "id": "carrot",
+      "name": "Carrot",
+      "category": "vegetables",
+      "tags": ["root_vegetable", "sweet", "fasting_friendly"]
+    },
+    {
+      "id": "beet",
+      "name": "Beetroot",
+      "category": "vegetables",
+      "tags": ["root_vegetable", "borscht_base", "fasting_friendly"]
+    },
+    {
+      "id": "onion",
+      "name": "Onion",
+      "category": "vegetables",
+      "tags": ["aromatic", "base_flavor", "fasting_friendly"]
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic",
+      "category": "vegetables",
+      "tags": ["aromatic", "strong_flavor", "fasting_friendly"]
+    },
+    {
+      "id": "mushroom",
+      "name": "Mushrooms",
+      "category": "vegetables",
+      "tags": ["protein_substitute", "umami", "fasting_friendly"]
+    },
+    {
+      "id": "lentils",
+      "name": "Lentils",
+      "category": "legumes",
+      "tags": ["protein", "high_fiber", "fasting_friendly"]
+    },
+    {
+      "id": "chickpeas",
+      "name": "Chickpeas",
+      "category": "legumes",
+      "tags": ["protein", "hummus_base", "fasting_friendly"]
+    },
+    {
+      "id": "beans",
+      "name": "Beans",
+      "category": "legumes",
+      "tags": ["protein", "hearty", "fasting_friendly"]
+    },
+    {
+      "id": "peas",
+      "name": "Peas (split peas)",
+      "category": "legumes",
+      "tags": ["protein", "traditional_russian", "fasting_friendly"]
+    },
+    {
+      "id": "walnuts",
+      "name": "Walnuts",
+      "category": "nuts_seeds",
+      "tags": ["fat", "protein", "fasting_friendly"]
+    },
+    {
+      "id": "sunflower_seeds",
+      "name": "Sunflower Seeds",
+      "category": "nuts_seeds",
+      "tags": ["slavic_staple", "fat", "fasting_friendly"]
+    },
+    {
+      "id": "flaxseed",
+      "name": "Flaxseed",
+      "category": "nuts_seeds",
+      "tags": ["fiber", "omega3", "fasting_friendly"]
+    },
+    {
+      "id": "olive_oil",
+      "name": "Olive Oil",
+      "category": "fats",
+      "tags": ["oil", "allowed_level_2_plus"]
+    },
+    {
+      "id": "sunflower_oil",
+      "name": "Sunflower Oil",
+      "category": "fats",
+      "tags": ["oil", "eastern_europe_common", "allowed_level_2_plus"]
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "category": "seafood",
+      "tags": ["animal_product", "allowed_level_4_plus"]
+    },
+    {
+      "id": "herring",
+      "name": "Herring",
+      "category": "seafood",
+      "tags": ["fish", "traditional_russian", "salted"]
+    },
+    {
+      "id": "cod",
+      "name": "Cod",
+      "category": "seafood",
+      "tags": ["fish", "lean_protein"]
+    },
+    {
+      "id": "shrimp",
+      "name": "Shrimp",
+      "category": "seafood",
+      "tags": ["shellfish", "optional_fast"]
+    },
+    {
+      "id": "salt",
+      "name": "Salt",
+      "category": "seasoning",
+      "tags": ["basic", "essential"]
+    },
+    {
+      "id": "pepper",
+      "name": "Black Pepper",
+      "category": "seasoning",
+      "tags": ["spice", "aromatic"]
+    }
+  ]
+}

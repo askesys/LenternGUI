@@ -1,0 +1,30 @@
+{
+  "Recipes" : [
+    {
+      "id" : 0,
+      "Title" : "",
+      "Description" : "",
+      "CookingTime" : 0,
+      "NumberOfPortions" : 0,
+      "Calories" : 0,
+      "Carbohydrates" : 0,
+      "Proteins" : 0,
+      "Fats" : 0,
+      "Image" : "",
+      "Ingridients" : [1,2,3]
+    },
+     {
+      "id" : 1,
+      "Title" : "",
+      "Description" : "",
+      "CookingTime" : 0,
+      "NumberOfPortions" : 0,
+      "Calories" : 0,
+      "Carbohydrates" : 0,
+      "Proteins" : 0,
+      "Fats" : 0,
+      "Image" : "",
+      "Ingridients" : [1,2,3]
+    }
+  ]
+}
