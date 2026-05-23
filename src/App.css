@@ -107,16 +107,37 @@ body {
   accent-color: #ffb020;
 }
 
+.ingredients-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ingredient-toggle-all {
+  border: none;
+  background: #f4f5f7;
+  color: #1f1f1f;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
 .ingredient-scroll-container {
   max-height: 320px;
   overflow-y: auto;
-  padding-right: 8px;
+  padding: 8px 8px 8px 10px;
+  border: 1px solid rgba(31, 31, 31, 0.14);
+  border-radius: 12px;
   scrollbar-width: thin;
   scrollbar-color: rgba(31, 31, 31, 0.28) transparent;
   background:
     linear-gradient(180deg, rgba(244, 245, 247, 0.75), transparent 14px),
     linear-gradient(0deg, rgba(244, 245, 247, 0.75), transparent 14px);
-  border-radius: 12px;
 }
 
 .ingredient-scroll-container::-webkit-scrollbar {

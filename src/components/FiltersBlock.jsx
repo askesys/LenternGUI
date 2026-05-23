@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import ingredientsData from '../data/ingredients.json'
 import { MultiCheck } from './filters/MultiCheck';
 import { SliderFilter } from '../components/filters/SliderFilter'
@@ -43,18 +43,17 @@ export default function FiltersBlock({onSubmit}){
         );
     };
 
-    function handleForm(e) {
-        e.preventDefault();
+    useEffect(() => {
         onSubmit({
             ingredients: selectedIngredients,
             maxCalories,
             maxCookingTime
         });
-    }
+    }, [selectedIngredients, maxCalories, maxCookingTime, onSubmit]);
 
     return (
         <aside className="filtersBlock">
-            <form onSubmit={handleForm}>
+            <div>
                 <h3>Filters</h3>
 
                 <div className="filter-section">
@@ -91,11 +90,7 @@ export default function FiltersBlock({onSubmit}){
                         Maximum Cooking Time (min):
                     </SliderFilter>
                 </div>
-
-                <button type="submit" className="filter-submit">
-                    Apply
-                </button>
-            </form>
+            </div>
         </aside>
     )
 }
