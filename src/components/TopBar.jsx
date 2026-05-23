@@ -1,11 +1,7 @@
-import { useState } from "react";
 import { useRecipes } from "../context/RecipeContext";
-import { useNavigate } from "react-router-dom";
 
-export default function TopBar() {
+export default function TopBar({ query, onQueryChange }) {
   const { addRecipe } = useRecipes();
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
 
   const handleAdd = () => {
     const newRecipe = {
@@ -18,6 +14,7 @@ export default function TopBar() {
       ingredients: [],
       steps: "Write steps..."
     };
+
     addRecipe(newRecipe);
   };
 
@@ -27,7 +24,7 @@ export default function TopBar() {
         className="search"
         placeholder="Search recipes..."
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => onQueryChange(e.target.value)}
       />
 
       <button className="addBtn" onClick={handleAdd}>

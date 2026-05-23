@@ -7,6 +7,7 @@ const recipes = [
     portions: 4,
     time: 15,
     ingredients: ["Eggs", "Salt", "Pepper"],
+    ingredientIds: ["egg", "salt", "pepper"],
     steps:
       "1. Beat eggs\n2. Heat pan\n3. Pour mixture\n4. Cook until golden",
   },
@@ -18,6 +19,7 @@ const recipes = [
     portions: 2,
     time: 20,
     ingredients: ["Flour", "Milk", "Eggs", "Sugar"],
+    ingredientIds: ["flour", "milk", "egg", "sugar"],
     steps:
       "1. Mix ingredients\n2. Heat pan\n3. Pour batter\n4. Flip when bubbles appear",
   },
@@ -29,6 +31,7 @@ const recipes = [
     portions: 6,
     time: 60,
     ingredients: ["Flour", "Cacao", "Sugar", "Butter", "Eggs"],
+    ingredientIds: ["flour", "cacao", "sugar", "butter", "egg"],
     steps:
       "1. Mix dry ingredients\n2. Add wet ingredients\n3. Bake at 180°C for 40 min",
   },

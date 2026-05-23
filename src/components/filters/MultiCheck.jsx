@@ -6,33 +6,19 @@ const formatCategory = (category) =>
     .replace(/_/g, " ")
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
-export function MultiCheck({ name, data, value = [], onChange }) {
+export function MultiCheck({
+  name,
+  data,
+  value = [],
+  onChange,
+  expandedCategories = {},
+  onExpandedCategoriesChange,
+}) {
   const [selected, setSelected] = useState(value);
-  const [expandedCategories, setExpandedCategories] = useState({});
 
   useEffect(() => {
     setSelected(value);
   }, [value]);
-
-  useEffect(() => {
-    const categories = Array.from(
-      new Set(
-        data.map((entry) =>
-          typeof entry === "string" ? "Options" : entry.category || "Other"
-        )
-      )
-    );
-
-    setExpandedCategories((prev) =>
-      categories.reduce(
-        (acc, category) => ({
-          ...acc,
-          [category]: prev[category] ?? true,
-        }),
-        {}
-      )
-    );
-  }, [data]);
 
   const groups = useMemo(
     () =>
@@ -60,26 +46,11 @@ export function MultiCheck({ name, data, value = [], onChange }) {
     );
   }
 
-  function toggleCategory(category, entries) {
-    const entryIds = entries.map(getItemValue);
-    const allSelected = entryIds.every((id) => selected.includes(id));
-
-    setSelected((prev) => {
-      if (allSelected) {
-        return prev.filter((id) => !entryIds.includes(id));
-      }
-
-      const next = new Set(prev);
-      entryIds.forEach((id) => next.add(id));
-      return Array.from(next);
-    });
-  }
-
   function toggleCategoryExpansion(category) {
-    setExpandedCategories((prev) => ({
-      ...prev,
-      [category]: !prev[category],
-    }));
+    onExpandedCategoriesChange?.({
+      ...expandedCategories,
+      [category]: !expandedCategories[category],
+    });
   }
 
   useEffect(() => {
@@ -91,33 +62,25 @@ export function MultiCheck({ name, data, value = [], onChange }) {
       {Object.entries(groups).map(([category, entries]) => {
         const entryIds = entries.map(getItemValue);
         const selectedCount = entryIds.filter((id) => selected.includes(id)).length;
-        const allSelected = selectedCount === entryIds.length;
         const collapsed = !expandedCategories[category];
 
         return (
           <div key={category} className="multi-check-group">
-            <div className="category-header">
-              <button
-                type="button"
-                className="category-toggle"
-                onClick={() => toggleCategoryExpansion(category)}
-              >
-                <span>{formatCategory(category)}</span>
+            <button
+              type="button"
+              className="category-toggle"
+              onClick={() => toggleCategoryExpansion(category)}
+            >
+              <span>{formatCategory(category)}</span>
+              <span className="category-meta">
                 <span className="category-count">
                   {selectedCount}/{entryIds.length}
                 </span>
                 <span className="category-chevron">
-                  {collapsed ? "+" : "−"}
+                  {collapsed ? "▸" : "▾"}
                 </span>
-              </button>
-              <button
-                type="button"
-                className={`category-select-all ${allSelected ? "selected" : ""}`}
-                onClick={() => toggleCategory(category, entries)}
-              >
-                {allSelected ? "Deselect all" : "Select all"}
-              </button>
-            </div>
+              </span>
+            </button>
 
             {!collapsed && (
               <div className="category-items">

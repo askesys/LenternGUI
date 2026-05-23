@@ -61,6 +61,42 @@
       "tags": ["aromatic", "strong_flavor", "fasting_friendly"]
     },
     {
+      "id": "egg",
+      "name": "Eggs",
+      "category": "protein",
+      "tags": ["protein", "breakfast", "baking"]
+    },
+    {
+      "id": "flour",
+      "name": "Flour",
+      "category": "baking",
+      "tags": ["baking", "staple"]
+    },
+    {
+      "id": "milk",
+      "name": "Milk",
+      "category": "dairy",
+      "tags": ["dairy", "baking"]
+    },
+    {
+      "id": "sugar",
+      "name": "Sugar",
+      "category": "baking",
+      "tags": ["sweetener", "baking"]
+    },
+    {
+      "id": "butter",
+      "name": "Butter",
+      "category": "fats",
+      "tags": ["dairy", "baking"]
+    },
+    {
+      "id": "cacao",
+      "name": "Cacao",
+      "category": "baking",
+      "tags": ["baking", "chocolate"]
+    },
+    {
       "id": "mushroom",
       "name": "Mushrooms",
       "category": "vegetables",
