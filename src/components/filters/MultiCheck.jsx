@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { OneCheck } from "./OneCheck";
 
 const formatCategory = (category) =>
@@ -14,11 +14,7 @@ export function MultiCheck({
   expandedCategories = {},
   onExpandedCategoriesChange,
 }) {
-  const [selected, setSelected] = useState(value);
-
-  useEffect(() => {
-    setSelected(value);
-  }, [value]);
+  const selected = value ?? [];
 
   const groups = useMemo(
     () =>
@@ -40,10 +36,24 @@ export function MultiCheck({
   const getItemLabel = (entry) =>
     typeof entry === "string" ? entry : entry.name;
 
+  const hasSameSelection = (nextSelection) =>
+    nextSelection.length === selected.length &&
+    nextSelection.every((item) => selected.includes(item));
+
+  const emitSelection = (nextSelection) => {
+    if (!onChange || hasSameSelection(nextSelection)) {
+      return;
+    }
+
+    onChange(nextSelection);
+  };
+
   function toggleItem(item) {
-    setSelected((prev) =>
-      prev.includes(item) ? prev.filter((x) => x !== item) : [...prev, item]
-    );
+    const nextSelection = selected.includes(item)
+      ? selected.filter((x) => x !== item)
+      : [...selected, item];
+
+    emitSelection(nextSelection);
   }
 
   function toggleCategoryExpansion(category) {
@@ -53,9 +63,16 @@ export function MultiCheck({
     });
   }
 
-  useEffect(() => {
-    onChange(selected);
-  }, [selected, onChange]);
+  function toggleCategorySelection(category, entries) {
+    const entryIds = entries.map(getItemValue);
+    const allSelected = entryIds.every((id) => selected.includes(id));
+
+    const nextSelection = allSelected
+      ? selected.filter((id) => !entryIds.includes(id))
+      : Array.from(new Set([...selected, ...entryIds]));
+
+    emitSelection(nextSelection);
+  }
 
   return (
     <>
@@ -63,24 +80,35 @@ export function MultiCheck({
         const entryIds = entries.map(getItemValue);
         const selectedCount = entryIds.filter((id) => selected.includes(id)).length;
         const collapsed = !expandedCategories[category];
+        const allSelected = selectedCount === entryIds.length;
 
         return (
           <div key={category} className="multi-check-group">
-            <button
-              type="button"
-              className="category-toggle"
-              onClick={() => toggleCategoryExpansion(category)}
-            >
-              <span>{formatCategory(category)}</span>
-              <span className="category-meta">
-                <span className="category-count">
-                  {selectedCount}/{entryIds.length}
+            <div className="category-toggle-row">
+              <button
+                type="button"
+                className="category-toggle"
+                onClick={() => toggleCategoryExpansion(category)}
+              >
+                <span>{formatCategory(category)}</span>
+                <span className="category-meta">
+                  <span className="category-count">
+                    {selectedCount}/{entryIds.length}
+                  </span>
+                  <span className="category-chevron">
+                    {collapsed ? "▸" : "▾"}
+                  </span>
                 </span>
-                <span className="category-chevron">
-                  {collapsed ? "▸" : "▾"}
-                </span>
-              </span>
-            </button>
+              </button>
+              <button
+                type="button"
+                className="category-toggle-btn"
+                onClick={() => toggleCategorySelection(category, entries)}
+                aria-label={`${allSelected ? "Clear" : "Select"} ${formatCategory(category)}`}
+              >
+                {allSelected ? "−" : "+"}
+              </button>
+            </div>
 
             {!collapsed && (
               <div className="category-items">

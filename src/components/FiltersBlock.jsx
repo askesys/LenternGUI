@@ -43,6 +43,18 @@ export default function FiltersBlock({onSubmit}){
         );
     };
 
+    const clearFilters = () => {
+        setSelectedIngredients([]);
+        setMaxCalories(0);
+        setMaxCookingTime(0);
+        setExpandedCategories(
+            ingredientCategories.reduce((acc, category) => ({
+                ...acc,
+                [category]: true,
+            }), {})
+        );
+    };
+
     useEffect(() => {
         onSubmit({
             ingredients: selectedIngredients,
@@ -54,7 +66,16 @@ export default function FiltersBlock({onSubmit}){
     return (
         <aside className="filtersBlock">
             <div>
-                <h3>Filters</h3>
+                <div className="filters-header-row">
+                    <h3>Filters</h3>
+                    <button
+                        type="button"
+                        className="clear-filters-btn"
+                        onClick={clearFilters}
+                    >
+                        Clear filters
+                    </button>
+                </div>
 
                 <div className="filter-section">
                     <div className="ingredients-header-row">
