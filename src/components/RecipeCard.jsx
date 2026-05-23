@@ -20,14 +20,15 @@ export default function RecipeCard({ recipe }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleCardClick = () => {
+    navigate(`/recipe/${recipe.id}`);
+  };
+
   return (
-    <div className="recipe-card-modern">
+    <div className="recipe-card-modern" onClick={handleCardClick}>
 
       {/* Image */}
-      <div
-        className="recipe-image-wrapper"
-        onClick={() => navigate(`/recipe/${recipe.id}`)}
-      >
+      <div className="recipe-image-wrapper">
         <img src={recipe.image} alt={recipe.title} />
       </div>
 
@@ -54,7 +55,8 @@ export default function RecipeCard({ recipe }) {
                 <button
                   type="button"
                   className="popup-menu-item"
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.stopPropagation();
                     setShowMenu(false);
                     navigate(`/recipe/${recipe.id}/edit`, {
                       replace: true,
@@ -67,7 +69,8 @@ export default function RecipeCard({ recipe }) {
                 <button
                   type="button"
                   className="popup-menu-item text-danger"
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.stopPropagation();
                     setShowMenu(false);
                     deleteRecipe(recipe.id);
                   }}
