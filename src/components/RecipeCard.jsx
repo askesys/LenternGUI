@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecipes } from "../context/RecipeContext";
 
 export default function RecipeCard({ recipe }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { deleteRecipe } = useRecipes();
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
@@ -55,10 +56,13 @@ export default function RecipeCard({ recipe }) {
                   className="popup-menu-item"
                   onClick={() => {
                     setShowMenu(false);
-                    navigate(`/recipe/${recipe.id}/edit`);
+                    navigate(`/recipe/${recipe.id}/edit`, {
+                      replace: true,
+                      state: { from: location.pathname },
+                    });
                   }}
                 >
-                  Modify
+                  Edit
                 </button>
                 <button
                   type="button"

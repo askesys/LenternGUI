@@ -9,8 +9,8 @@ export default function TopBar({
 }) {
   const navigate = useNavigate();
 
-  const handleAdd = () => {
-    navigate("/recipe/new");
+  const handleCreate = () => {
+    navigate("/recipe/create");
   };
 
   const handleLogoClick = () => {
@@ -42,8 +42,8 @@ export default function TopBar({
       <div className="topbar-actions">
         {actions}
         {showAdd && (
-          <button className="addBtn" onClick={handleAdd}>
-            + Add recipe
+          <button className="addBtn" onClick={handleCreate}>
+            + Create recipe
           </button>
         )}
       </div>

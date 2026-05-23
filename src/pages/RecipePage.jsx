@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useRecipes } from "../context/RecipeContext";
 import TopBar from "../components/TopBar";
 import { useEffect, useMemo, useState } from "react";
@@ -23,9 +23,10 @@ const buildRecipeFromForm = (form) => ({
 
 export default function RecipePage() {
   const { id } = useParams();
+  const location = useLocation();
   const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
   const navigate = useNavigate();
-  const isNewRecipe = !id || id === "new";
+  const isNewRecipe = !id || id === "create";
   const isEditRecipe = Boolean(id) && !isNewRecipe && window.location.pathname.endsWith("/edit");
 
   const recipe = useMemo(
@@ -60,7 +61,7 @@ export default function RecipePage() {
 
   const handleCreate = () => {
     addRecipe(buildRecipeFromForm(form));
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   const handleUpdate = () => {
@@ -68,7 +69,7 @@ export default function RecipePage() {
       ...recipe,
       ...buildRecipeFromForm(form),
     });
-    navigate(`/recipe/${recipe.id}`);
+    navigate(`/recipe/${recipe.id}`, { replace: true });
   };
 
   const handleFieldChange = (field, value) => {
@@ -79,15 +80,12 @@ export default function RecipePage() {
   };
 
   const handleCancel = () => {
-    if (isEditRecipe) {
-      navigate(`/recipe/${recipe.id}`);
-      return;
-    }
+    const returnTo = location.state?.from || (isEditRecipe ? `/recipe/${recipe.id}` : "/");
 
-    navigate("/");
+    navigate(returnTo, { replace: true });
   };
 
-  const pageTitle = isEditRecipe ? "Edit recipe" : isNewRecipe ? "Add a new recipe" : "Recipe";
+  const pageTitle = isEditRecipe ? "Edit recipe" : isNewRecipe ? "Create recipe" : "Recipe";
   const submitLabel = isEditRecipe ? "Save changes" : "Create recipe";
   const submitHandler = isEditRecipe ? handleUpdate : handleCreate;
 
@@ -156,7 +154,7 @@ export default function RecipePage() {
               rows="6"
               value={form.ingredients}
               onChange={(e) => handleFieldChange("ingredients", e.target.value)}
-              placeholder="Add one ingredient per line"
+              placeholder="Enter one ingredient per line"
             />
           </label>
 
@@ -193,7 +191,12 @@ export default function RecipePage() {
             <button
               type="button"
               className="topbar-action-btn"
-              onClick={() => navigate(`/recipe/${recipe.id}/edit`)}
+              onClick={() =>
+                navigate(`/recipe/${recipe.id}/edit`, {
+                  replace: true,
+                  state: { from: location.pathname },
+                })
+              }
             >
               Edit
             </button>
