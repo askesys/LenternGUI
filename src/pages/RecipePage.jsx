@@ -2,6 +2,11 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useRecipes } from "../context/RecipeContext";
 import TopBar from "../components/TopBar";
 import { useEffect, useMemo, useState } from "react";
+import {
+  buildIngredientsFromForm,
+  formatIngredientDisplay,
+  serializeIngredients,
+} from "../utils/ingredientHelpers";
 
 const emptyForm = {
   title: "",
@@ -15,16 +20,13 @@ const emptyForm = {
 
 const buildRecipeFromForm = (form) => ({
   ...form,
-  ingredients: form.ingredients
-    .split("\n")
-    .map((item) => item.trim())
-    .filter(Boolean),
+  ingredients: buildIngredientsFromForm(form.ingredients),
 });
 
 export default function RecipePage() {
   const { id } = useParams();
   const location = useLocation();
-  const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
+  const { recipes, loading, error, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
   const navigate = useNavigate();
   const isNewRecipe = !id || id === "create";
   const isEditRecipe = Boolean(id) && !isNewRecipe && window.location.pathname.endsWith("/edit");
@@ -49,13 +51,19 @@ export default function RecipePage() {
         calories: recipe.calories ?? 0,
         portions: recipe.portions ?? 1,
         time: recipe.time ?? 0,
-        ingredients: Array.isArray(recipe.ingredients)
-          ? recipe.ingredients.join("\n")
-          : "",
+        ingredients: serializeIngredients(recipe.ingredients),
         steps: recipe.steps || "",
       });
     }
   }, [isNewRecipe, recipe]);
+
+  if (loading) {
+    return <p>Loading recipe...</p>;
+  }
+
+  if (error) {
+    return <p>Unable to load recipe right now. Please try again.</p>;
+  }
 
   if (!isNewRecipe && !recipe) return <p>Not found</p>;
 
@@ -154,7 +162,7 @@ export default function RecipePage() {
               rows="6"
               value={form.ingredients}
               onChange={(e) => handleFieldChange("ingredients", e.target.value)}
-              placeholder="Enter one ingredient per line"
+              placeholder="Enter one ingredient per line, for example: 2 tbsp sugar"
             />
           </label>
 
@@ -233,8 +241,8 @@ export default function RecipePage() {
             <div className="recipeSection recipeSectionIngredients">
               <h3>Ingredients</h3>
               <ul>
-                {recipe.ingredients.map((i, idx) => (
-                  <li key={idx}>{i}</li>
+                {(Array.isArray(recipe.ingredients) ? recipe.ingredients : []).map((ingredient, idx) => (
+                  <li key={idx}>{formatIngredientDisplay(ingredient)}</li>
                 ))}
               </ul>
             </div>

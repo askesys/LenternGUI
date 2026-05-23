@@ -4,9 +4,10 @@ import RecipeCard from "../components/RecipeCard";
 import TopBar from "../components/TopBar";
 import FiltersBlock from "../components/FiltersBlock";
 import ingredientsData from "../data/ingredients.json";
+import { normalizeIngredients } from "../utils/ingredientHelpers";
 
 export default function AllRecipes() {
-  const { recipes } = useRecipes();
+  const { recipes, loading, error } = useRecipes();
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
     ingredients: [],
@@ -27,7 +28,7 @@ export default function AllRecipes() {
       const searchableText = [
         recipe.title,
         recipe.steps,
-        ...(recipe.ingredients || []),
+        ...normalizeIngredients(recipe.ingredients),
         ...(recipe.ingredientIds || []).map(
           (ingredientId) => ingredientNameMap.get(ingredientId) || ingredientId
         ),
@@ -68,7 +69,11 @@ export default function AllRecipes() {
       <div className="wrapper">
         <FiltersBlock onSubmit={setFilters} />
         <div className="cardsBlock">
-          {filteredRecipes.length > 0 ? (
+          {loading ? (
+            <p>Loading recipes...</p>
+          ) : error ? (
+            <p>Unable to load recipes right now. Please try again.</p>
+          ) : filteredRecipes.length > 0 ? (
             filteredRecipes.map((recipe) => (
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))

@@ -6,7 +6,11 @@ const recipes = [
     calories: 640,
     portions: 4,
     time: 15,
-    ingredients: ["Eggs", "Salt", "Pepper"],
+    ingredients: [
+      { name: "Eggs", amount: 3, measure: "pcs" },
+      { name: "Salt", amount: 1, measure: "pinch" },
+      { name: "Pepper", amount: 1, measure: "pinch" },
+    ],
     ingredientIds: ["egg", "salt", "pepper"],
     steps:
       "1. Beat eggs\n2. Heat pan\n3. Pour mixture\n4. Cook until golden",
@@ -18,7 +22,12 @@ const recipes = [
     calories: 520,
     portions: 2,
     time: 20,
-    ingredients: ["Flour", "Milk", "Eggs", "Sugar"],
+    ingredients: [
+      { name: "Flour", amount: 200, measure: "g" },
+      { name: "Milk", amount: 250, measure: "ml" },
+      { name: "Eggs", amount: 2, measure: "pcs" },
+      { name: "Sugar", amount: 2, measure: "tbsp" },
+    ],
     ingredientIds: ["flour", "milk", "egg", "sugar"],
     steps:
       "1. Mix ingredients\n2. Heat pan\n3. Pour batter\n4. Flip when bubbles appear",
@@ -30,7 +39,13 @@ const recipes = [
     calories: 900,
     portions: 6,
     time: 60,
-    ingredients: ["Flour", "Cacao", "Sugar", "Butter", "Eggs"],
+    ingredients: [
+      { name: "Flour", amount: 200, measure: "g" },
+      { name: "Cacao", amount: 50, measure: "g" },
+      { name: "Sugar", amount: 150, measure: "g" },
+      { name: "Butter", amount: 150, measure: "g" },
+      { name: "Eggs", amount: 3, measure: "pcs" },
+    ],
     ingredientIds: ["flour", "cacao", "sugar", "butter", "egg"],
     steps:
       "1. Mix dry ingredients\n2. Add wet ingredients\n3. Bake at 180°C for 40 min",
