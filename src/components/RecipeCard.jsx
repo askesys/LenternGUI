@@ -55,7 +55,7 @@ export default function RecipeCard({ recipe }) {
                   className="popup-menu-item"
                   onClick={() => {
                     setShowMenu(false);
-                    alert("Edit logic here");
+                    navigate(`/recipe/${recipe.id}/edit`);
                   }}
                 >
                   Modify

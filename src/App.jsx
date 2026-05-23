@@ -10,6 +10,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AllRecipes />} />
+          <Route path="/recipe/new" element={<RecipePage />} />
+          <Route path="/recipe/:id/edit" element={<RecipePage />} />
           <Route path="/recipe/:id" element={<RecipePage />} />
         </Routes>
       </BrowserRouter>

@@ -1,35 +1,52 @@
-import { useRecipes } from "../context/RecipeContext";
+import { useNavigate } from "react-router-dom";
 
-export default function TopBar({ query, onQueryChange }) {
-  const { addRecipe } = useRecipes();
+export default function TopBar({
+  query = "",
+  onQueryChange = () => {},
+  showSearch = true,
+  showAdd = true,
+  actions = null,
+}) {
+  const navigate = useNavigate();
 
   const handleAdd = () => {
-    const newRecipe = {
-      id: Date.now(),
-      title: "New Recipe",
-      image: "/recipe_images/omelette-without-eggs.jpg",
-      calories: 0,
-      portions: 1,
-      time: 0,
-      ingredients: [],
-      steps: "Write steps..."
-    };
+    navigate("/recipe/new");
+  };
 
-    addRecipe(newRecipe);
+  const handleLogoClick = () => {
+    navigate("/");
   };
 
   return (
     <div className="topbar">
-      <input
-        className="search"
-        placeholder="Search recipes..."
-        value={query}
-        onChange={(e) => onQueryChange(e.target.value)}
-      />
+      <div className="topbar-brand">
+        <button
+          type="button"
+          className="topbar-logo"
+          onClick={handleLogoClick}
+          aria-label="Go to all recipes"
+        >
+          Lentern
+        </button>
+      </div>
 
-      <button className="addBtn" onClick={handleAdd}>
-        + Add recipe
-      </button>
+      {showSearch && (
+        <input
+          className="search"
+          placeholder="Search recipes..."
+          value={query}
+          onChange={(e) => onQueryChange(e.target.value)}
+        />
+      )}
+
+      <div className="topbar-actions">
+        {actions}
+        {showAdd && (
+          <button className="addBtn" onClick={handleAdd}>
+            + Add recipe
+          </button>
+        )}
+      </div>
     </div>
   );
 }
