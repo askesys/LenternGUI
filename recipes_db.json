@@ -8,13 +8,39 @@
       "portions": 4,
       "time": 20,
       "ingredients": [
-        { "name": "Beetroot", "amount": 3, "measure": "pcs" },
-        { "name": "Carrot", "amount": 2, "measure": "pcs" },
-        { "name": "Olive Oil", "amount": 1, "measure": "tbsp" },
-        { "name": "Walnuts", "amount": 50, "measure": "g" },
-        { "name": "Salt", "amount": 1, "measure": "pinch" }
+        {
+          "name": "Beetroot",
+          "amount": 3,
+          "measure": "pcs"
+        },
+        {
+          "name": "Carrot",
+          "amount": 2,
+          "measure": "pcs"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 1,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Walnuts",
+          "amount": 50,
+          "measure": "g"
+        },
+        {
+          "name": "Salt",
+          "amount": 1,
+          "measure": "pinch"
+        }
       ],
-      "ingredientIds": ["beet", "carrot", "olive_oil", "walnuts", "salt"],
+      "ingredientIds": [
+        "beet",
+        "carrot",
+        "olive_oil",
+        "walnuts",
+        "salt"
+      ],
       "steps": "1. Roast or boil beetroot until tender, then slice thinly.\n2. Shred carrots and chop walnuts.\n3. Toss vegetables with olive oil and salt.\n4. Sprinkle walnuts over the top before serving."
     },
     {
@@ -25,13 +51,39 @@
       "portions": 3,
       "time": 30,
       "ingredients": [
-        { "name": "Carrot", "amount": 6, "measure": "pcs" },
-        { "name": "Onion", "amount": 2, "measure": "pcs" },
-        { "name": "Olive Oil", "amount": 2, "measure": "tbsp" },
-        { "name": "Salt", "amount": 1, "measure": "pinch" },
-        { "name": "Black Pepper", "amount": 1, "measure": "pinch" }
+        {
+          "name": "Carrot",
+          "amount": 6,
+          "measure": "pcs"
+        },
+        {
+          "name": "Onion",
+          "amount": 2,
+          "measure": "pcs"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 2,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Salt",
+          "amount": 1,
+          "measure": "pinch"
+        },
+        {
+          "name": "Black Pepper",
+          "amount": 1,
+          "measure": "pinch"
+        }
       ],
-      "ingredientIds": ["carrot", "onion", "olive_oil", "salt", "pepper"],
+      "ingredientIds": [
+        "carrot",
+        "onion",
+        "olive_oil",
+        "salt",
+        "pepper"
+      ],
       "steps": "1. Preheat oven to 200°C.\n2. Cut carrots and onions into chunks.\n3. Toss with olive oil, salt, and pepper.\n4. Roast for 25 minutes, stirring once halfway through."
     },
     {
@@ -42,13 +94,38 @@
       "portions": 2,
       "time": 20,
       "ingredients": [
-        { "name": "Oats", "amount": 1, "measure": "cup" },
-        { "name": "Walnuts", "amount": 30, "measure": "g" },
-        { "name": "Apple", "amount": 1, "measure": "pcs" },
-        { "name": "Olive Oil", "amount": 1, "measure": "tbsp" },
-        { "name": "Salt", "amount": 1, "measure": "pinch" }
+        {
+          "name": "Oats",
+          "amount": 1,
+          "measure": "cup"
+        },
+        {
+          "name": "Walnuts",
+          "amount": 30,
+          "measure": "g"
+        },
+        {
+          "name": "Apple",
+          "amount": 1,
+          "measure": "pcs"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 1,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Salt",
+          "amount": 1,
+          "measure": "pinch"
+        }
       ],
-      "ingredientIds": ["oats", "walnuts", "olive_oil", "salt"],
+      "ingredientIds": [
+        "oats",
+        "walnuts",
+        "olive_oil",
+        "salt"
+      ],
       "steps": "1. Simmer oats in 2 cups of water for 10 minutes.\n2. Dice apple and toast walnuts lightly.\n3. Stir apple and walnuts into oatmeal.\n4. Finish with olive oil and a pinch of salt."
     },
     {
@@ -59,13 +136,39 @@
       "portions": 4,
       "time": 45,
       "ingredients": [
-        { "name": "Potato", "amount": 800, "measure": "g" },
-        { "name": "Olive Oil", "amount": 2, "measure": "tbsp" },
-        { "name": "Garlic", "amount": 2, "measure": "cloves" },
-        { "name": "Salt", "amount": 1, "measure": "pinch" },
-        { "name": "Black Pepper", "amount": 1, "measure": "pinch" }
+        {
+          "name": "Potato",
+          "amount": 800,
+          "measure": "g"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 2,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Garlic",
+          "amount": 2,
+          "measure": "cloves"
+        },
+        {
+          "name": "Salt",
+          "amount": 1,
+          "measure": "pinch"
+        },
+        {
+          "name": "Black Pepper",
+          "amount": 1,
+          "measure": "pinch"
+        }
       ],
-      "ingredientIds": ["potato", "olive_oil", "garlic", "salt", "pepper"],
+      "ingredientIds": [
+        "potato",
+        "olive_oil",
+        "garlic",
+        "salt",
+        "pepper"
+      ],
       "steps": "1. Wash and halve potatoes.\n2. Rub them with olive oil, garlic, salt, and pepper.\n3. Bake at 200°C for 35 minutes until crisp.\n4. Serve hot with fresh herbs if desired."
     },
     {
@@ -76,13 +179,39 @@
       "portions": 6,
       "time": 40,
       "ingredients": [
-        { "name": "Oats", "amount": 2, "measure": "cups" },
-        { "name": "Sunflower Seeds", "amount": 50, "measure": "g" },
-        { "name": "Flaxseed", "amount": 2, "measure": "tbsp" },
-        { "name": "Olive Oil", "amount": 2, "measure": "tbsp" },
-        { "name": "Salt", "amount": 1, "measure": "pinch" }
+        {
+          "name": "Oats",
+          "amount": 2,
+          "measure": "cups"
+        },
+        {
+          "name": "Sunflower Seeds",
+          "amount": 50,
+          "measure": "g"
+        },
+        {
+          "name": "Flaxseed",
+          "amount": 2,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 2,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Salt",
+          "amount": 1,
+          "measure": "pinch"
+        }
       ],
-      "ingredientIds": ["oats", "sunflower_seeds", "flaxseed", "olive_oil", "salt"],
+      "ingredientIds": [
+        "oats",
+        "sunflower_seeds",
+        "flaxseed",
+        "olive_oil",
+        "salt"
+      ],
       "steps": "1. Mix oats, sunflower seeds, flaxseed, and salt in a bowl.\n2. Stir in olive oil and 1 cup of water until combined.\n3. Press mixture into a lined tray.\n4. Bake at 180°C for 25 minutes, then cool and cut."
     },
     {
@@ -93,13 +222,37 @@
       "portions": 4,
       "time": 40,
       "ingredients": [
-        { "name": "Buckwheat", "amount": 1, "measure": "cup" },
-        { "name": "Bell Pepper", "amount": 4, "measure": "pcs" },
-        { "name": "Onion", "amount": 1, "measure": "pcs" },
-        { "name": "Olive Oil", "amount": 1, "measure": "tbsp" },
-        { "name": "Tomato", "amount": 2, "measure": "pcs" }
+        {
+          "name": "Buckwheat",
+          "amount": 1,
+          "measure": "cup"
+        },
+        {
+          "name": "Bell Pepper",
+          "amount": 4,
+          "measure": "pcs"
+        },
+        {
+          "name": "Onion",
+          "amount": 1,
+          "measure": "pcs"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 1,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Tomato",
+          "amount": 2,
+          "measure": "pcs"
+        }
       ],
-      "ingredientIds": ["buckwheat", "onion", "olive_oil"],
+      "ingredientIds": [
+        "buckwheat",
+        "onion",
+        "olive_oil"
+      ],
       "steps": "1. Cook buckwheat in 2 cups of water.\n2. Slice onion and tomatoes, and halve bell peppers.\n3. Mix buckwheat with onion and tomatoes.\n4. Fill peppers, brush with olive oil, and bake at 190°C for 25 minutes."
     },
     {
@@ -110,13 +263,39 @@
       "portions": 5,
       "time": 45,
       "ingredients": [
-        { "name": "Beetroot", "amount": 3, "measure": "pcs" },
-        { "name": "Cabbage", "amount": 1, "measure": "pcs" },
-        { "name": "Carrot", "amount": 2, "measure": "pcs" },
-        { "name": "Onion", "amount": 1, "measure": "pcs" },
-        { "name": "Olive Oil", "amount": 2, "measure": "tbsp" }
+        {
+          "name": "Beetroot",
+          "amount": 3,
+          "measure": "pcs"
+        },
+        {
+          "name": "Cabbage",
+          "amount": 1,
+          "measure": "pcs"
+        },
+        {
+          "name": "Carrot",
+          "amount": 2,
+          "measure": "pcs"
+        },
+        {
+          "name": "Onion",
+          "amount": 1,
+          "measure": "pcs"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 2,
+          "measure": "tbsp"
+        }
       ],
-      "ingredientIds": ["beet", "cabbage", "carrot", "onion", "olive_oil"],
+      "ingredientIds": [
+        "beet",
+        "cabbage",
+        "carrot",
+        "onion",
+        "olive_oil"
+      ],
       "steps": "1. Chop beetroot, cabbage, carrots, and onion.\n2. Sauté onion in olive oil for 3 minutes.\n3. Add vegetables and 5 cups of water; simmer for 30 minutes.\n4. Season with salt and pepper, then serve warm."
     },
     {
@@ -127,13 +306,38 @@
       "portions": 4,
       "time": 35,
       "ingredients": [
-        { "name": "Lentils", "amount": 1, "measure": "cup" },
-        { "name": "Carrot", "amount": 2, "measure": "pcs" },
-        { "name": "Celery", "amount": 2, "measure": "pcs" },
-        { "name": "Onion", "amount": 1, "measure": "pcs" },
-        { "name": "Olive Oil", "amount": 1, "measure": "tbsp" }
+        {
+          "name": "Lentils",
+          "amount": 1,
+          "measure": "cup"
+        },
+        {
+          "name": "Carrot",
+          "amount": 2,
+          "measure": "pcs"
+        },
+        {
+          "name": "Celery",
+          "amount": 2,
+          "measure": "pcs"
+        },
+        {
+          "name": "Onion",
+          "amount": 1,
+          "measure": "pcs"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 1,
+          "measure": "tbsp"
+        }
       ],
-      "ingredientIds": ["lentils", "carrot", "onion", "olive_oil"],
+      "ingredientIds": [
+        "lentils",
+        "carrot",
+        "onion",
+        "olive_oil"
+      ],
       "steps": "1. Rinse lentils and set aside.\n2. Dice onion and carrots; slice celery.\n3. Sauté onion in olive oil for 3 minutes.\n4. Add carrots, celery, lentils, and 4 cups of water.\n5. Simmer for 25 minutes until lentils are soft and soup is thick."
     },
     {
@@ -144,13 +348,39 @@
       "portions": 3,
       "time": 30,
       "ingredients": [
-        { "name": "Beetroot", "amount": 4, "measure": "pcs" },
-        { "name": "Walnuts", "amount": 50, "measure": "g" },
-        { "name": "Olive Oil", "amount": 1, "measure": "tbsp" },
-        { "name": "Salt", "amount": 1, "measure": "pinch" },
-        { "name": "Black Pepper", "amount": 1, "measure": "pinch" }
+        {
+          "name": "Beetroot",
+          "amount": 4,
+          "measure": "pcs"
+        },
+        {
+          "name": "Walnuts",
+          "amount": 50,
+          "measure": "g"
+        },
+        {
+          "name": "Olive Oil",
+          "amount": 1,
+          "measure": "tbsp"
+        },
+        {
+          "name": "Salt",
+          "amount": 1,
+          "measure": "pinch"
+        },
+        {
+          "name": "Black Pepper",
+          "amount": 1,
+          "measure": "pinch"
+        }
       ],
-      "ingredientIds": ["beet", "walnuts", "olive_oil", "salt", "pepper"],
+      "ingredientIds": [
+        "beet",
+        "walnuts",
+        "olive_oil",
+        "salt",
+        "pepper"
+      ],
       "steps": "1. Roast beetroot at 200°C for 25 minutes until tender.\n2. Toss with olive oil, salt, and pepper.\n3. Sprinkle walnuts over the top.\n4. Serve warm or at room temperature."
     }
   ],

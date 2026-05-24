@@ -27,12 +27,10 @@ export default function RecipeCard({ recipe }) {
   return (
     <div className="recipe-card-modern" onClick={handleCardClick}>
 
-      {/* Image */}
       <div className="recipe-image-wrapper">
         <img src={recipe.image} alt={recipe.title} />
       </div>
 
-      {/* Content */}
       <div className="recipe-body">
         <div className="recipe-header">
           <h5>{recipe.title}</h5>
@@ -82,7 +80,6 @@ export default function RecipeCard({ recipe }) {
           </div>
         </div>
 
-        {/* Info row */}
         <div className="recipe-meta">
           <span>{recipe.calories} kcal</span>
           <span>{recipe.portions} portions</span>
