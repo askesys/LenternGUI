@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const API_URL = "http://localhost:3001/recipes";
+const API_URL = "http://localhost:3000/recipes";
 
 const RecipeContext = createContext();
 

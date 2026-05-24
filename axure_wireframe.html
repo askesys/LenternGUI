@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lentern Wireframe</title>
+    <style>
+      :root {
+        --green: #3f5e31;
+        --cream: #ffddab;
+        --cream-soft: #fff6e7;
+        --pink: #ff9a9a;
+        --brown: #6a2f1c;
+        --surface: #ffffff;
+        --border: #e6cfb7;
+        --shadow: 0 18px 48px rgba(94, 80, 52, 0.12);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #fff7e8 0%, #ffe7c7 100%);
+        color: var(--brown);
+        min-height: 100vh;
+      }
+
+      /* ── Screen switcher ── */
+      .screen-toggle {
+        display: flex;
+        gap: 8px;
+        padding: 14px 20px 0;
+      }
+
+      .tab-btn {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 13px;
+        color: var(--brown);
+      }
+
+      .tab-btn.active {
+        background: var(--green);
+        color: var(--cream);
+        border-color: transparent;
+      }
+
+      .screen { display: none; }
+      .screen.visible { display: block; }
+
+      /* ── TopBar ── */
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 20px;
+        background: var(--green);
+        color: var(--cream);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .topbar-logo {
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        background: none;
+        border: none;
+        color: var(--cream);
+        cursor: pointer;
+        padding: 0;
+      }
+
+      .search {
+        flex: 1;
+        max-width: 50%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(106, 47, 28, 0.18);
+        font-size: 14px;
+      }
+
+      .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 9px 16px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 13px;
+      }
+
+      .btn-primary { background: var(--brown); color: var(--cream); }
+      .btn-secondary { background: var(--cream); color: var(--brown); }
+      .btn-danger { background: var(--pink); color: var(--brown); }
+
+      /* ── Layout ── */
+      .layout {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        align-items: flex-start;
+      }
+
+      /* ── Sidebar / Filters ── */
+      .sidebar {
+        width: 260px;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 22px;
+        padding: 18px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 72px;
+      }
+
+      .filters-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .filters-title {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .clear-filters-btn {
+        border: none;
+        background: var(--cream);
+        color: var(--brown);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .filter-section { margin-bottom: 18px; }
+
+      .ingredients-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .section-label {
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .toggle-all-btn {
+        border: none;
+        background: transparent;
+        color: var(--green);
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 12px;
+        padding: 2px 6px;
+      }
+
+      .ingredient-scroll-container {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 6px 8px;
+        background: linear-gradient(180deg, rgba(255, 221, 171, 0.25), transparent 70%);
+        max-height: 240px;
+        overflow-y: auto;
+      }
+
+      /* MultiCheck category group */
+      .multi-check-group { margin-bottom: 4px; }
+
+      .category-toggle-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px 4px;
+        border-bottom: 1px solid rgba(106, 47, 28, 0.07);
+      }
+
+      .category-toggle {
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: none;
+        border: none;
+        padding: 0 4px 0 0;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--brown);
+        text-align: left;
+      }
+
+      .category-meta {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        color: #888;
+        font-size: 11px;
+        font-weight: 400;
+      }
+
+      .category-chevron { font-size: 10px; }
+
+      .category-select-btn {
+        border: 1px solid var(--border);
+        background: var(--cream);
+        color: var(--brown);
+        border-radius: 50%;
+        width: 22px;
+        height: 22px;
+        font-weight: 900;
+        font-size: 14px;
+        cursor: pointer;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .category-items {
+        padding: 4px 0 4px 8px;
+      }
+
+      .check-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 0;
+        font-size: 12px;
+      }
+
+      .check-item input[type="checkbox"] {
+        accent-color: var(--green);
+        width: 13px;
+        height: 13px;
+      }
+
+      /* Slider filter */
+      .slider-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+
+      .slider-value {
+        font-size: 11px;
+        color: #888;
+        margin-top: 2px;
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--green);
+      }
+
+      /* ── Cards grid ── */
+      .cards {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 18px;
+        align-content: start;
+      }
+
+      .recipe-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: visible;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        position: relative;
+      }
+
+      .recipe-image-wrapper {
+        height: 140px;
+        background: linear-gradient(135deg, #e9f4d8, #ffd8af);
+        border-bottom: 1px solid var(--border);
+        border-radius: 18px 18px 0 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .recipe-image-wrapper::before,
+      .recipe-image-wrapper::after {
+        content: "";
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        border-radius: 10px;
+        background: rgba(106, 47, 28, 0.13);
+      }
+
+      .recipe-image-wrapper::before { top: 16px; height: 40px; }
+      .recipe-image-wrapper::after  { top: 66px; height: 20px; }
+
+      .recipe-body { padding: 10px 12px 14px; }
+
+      .recipe-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .recipe-title {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 800;
+      }
+
+      .popup-menu-wrapper { position: relative; }
+
+      .menu-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: var(--cream);
+        color: var(--brown);
+        font-size: 18px;
+        cursor: pointer;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .popup-menu {
+        position: absolute;
+        right: 0;
+        top: 36px;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        z-index: 20;
+        min-width: 100px;
+        overflow: hidden;
+      }
+
+      .popup-menu-item {
+        display: block;
+        width: 100%;
+        padding: 10px 14px;
+        text-align: left;
+        background: none;
+        border: none;
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        color: var(--brown);
+      }
+
+      .popup-menu-item:hover { background: var(--cream-soft); }
+      .popup-menu-item.danger { color: #b91c1c; }
+
+      .recipe-meta {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+
+      .meta-pill {
+        background: rgba(255, 221, 171, 0.55);
+        padding: 5px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      /* ── Recipe Detail Page ── */
+      .detail-page {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 28px 20px 50px;
+      }
+
+      .detail-card {
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        padding: 26px;
+      }
+
+      .hero-image {
+        height: 300px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #e9f4d8, #ffd8af);
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+
+      .hero-image::before {
+        content: "";
+        position: absolute;
+        inset: 24px;
+        border-radius: 14px;
+        background: rgba(106, 47, 28, 0.12);
+      }
+
+      .detail-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .detail-title { margin: 0; font-size: 28px; font-weight: 800; }
+
+      .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+      .pill {
+        background: var(--cream);
+        color: var(--brown);
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        gap: 16px;
+      }
+
+      .section-box {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 221, 171, 0.18));
+        border-radius: 18px;
+        border: 1px solid var(--border);
+        padding: 16px 18px;
+      }
+
+      .section-box h3 { margin: 0 0 10px; font-size: 17px; }
+
+      .ingredient-list { padding-left: 16px; line-height: 1.9; margin: 0; font-size: 14px; }
+      .steps-text { line-height: 1.8; margin: 0; font-size: 14px; }
+
+      /* ── Create / Edit Form ── */
+      .form-page {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 28px 20px 50px;
+      }
+
+      .form-card {
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        padding: 24px;
+      }
+
+      .form-page-title {
+        margin: 0 0 20px;
+        font-size: 22px;
+        font-weight: 800;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      .field label { font-weight: 800; font-size: 13px; }
+
+      .input, .textarea {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font: inherit;
+        font-size: 14px;
+        background: #fff;
+        color: var(--brown);
+      }
+
+      .textarea { min-height: 120px; resize: vertical; }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Screen switcher -->
+    <div class="screen-toggle">
+      <button class="tab-btn active" onclick="showScreen('home', this)">Home</button>
+      <button class="tab-btn" onclick="showScreen('detail', this)">Recipe Detail</button>
+      <button class="tab-btn" onclick="showScreen('create', this)">Create Recipe</button>
+      <button class="tab-btn" onclick="showScreen('edit', this)">Edit Recipe</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SCREEN 1 · Home / All Recipes
+    ══════════════════════════════════════════ -->
+    <div id="screen-home" class="screen visible">
+
+      <div class="topbar">
+        <button class="topbar-logo">Lentern</button>
+        <input class="search" value="Search recipes..." readonly />
+        <div class="topbar-actions">
+          <button class="btn btn-primary">+ Create recipe</button>
+        </div>
+      </div>
+
+      <div class="layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="filters-header-row">
+            <h2 class="filters-title">Filters</h2>
+            <button class="clear-filters-btn">Clear filters</button>
+          </div>
+
+          <!-- Ingredients multi-check -->
+          <div class="filter-section">
+            <div class="ingredients-header-row">
+              <span class="section-label">Ingredients</span>
+              <button class="toggle-all-btn">Fold all</button>
+            </div>
+            <div class="ingredient-scroll-container">
+
+              <!-- Category: Vegetables (expanded, 2 checked) -->
+              <div class="multi-check-group">
+                <div class="category-toggle-row">
+                  <button class="category-toggle">
+                    <span>Vegetables</span>
+                    <span class="category-meta">
+                      <span>2/8</span>
+                      <span class="category-chevron">▾</span>
+                    </span>
+                  </button>
+                  <button class="category-select-btn" title="Select all">+</button>
+                </div>
+                <div class="category-items">
+                  <label class="check-item"><input type="checkbox" checked /> Carrot</label>
+                  <label class="check-item"><input type="checkbox" checked /> Onion</label>
+                  <label class="check-item"><input type="checkbox" /> Potato</label>
+                  <label class="check-item"><input type="checkbox" /> Tomato</label>
+                </div>
+              </div>
+
+              <!-- Category: Protein (collapsed) -->
+              <div class="multi-check-group">
+                <div class="category-toggle-row">
+                  <button class="category-toggle">
+                    <span>Protein</span>
+                    <span class="category-meta">
+                      <span>0/5</span>
+                      <span class="category-chevron">▸</span>
+                    </span>
+                  </button>
+                  <button class="category-select-btn" title="Select all">+</button>
+                </div>
+              </div>
+
+              <!-- Category: Dairy (collapsed) -->
+              <div class="multi-check-group">
+                <div class="category-toggle-row">
+                  <button class="category-toggle">
+                    <span>Dairy</span>
+                    <span class="category-meta">
+                      <span>0/4</span>
+                      <span class="category-chevron">▸</span>
+                    </span>
+                  </button>
+                  <button class="category-select-btn" title="Select all">+</button>
+                </div>
+              </div>
+
+              <!-- Category: Sweet (collapsed) -->
+              <div class="multi-check-group">
+                <div class="category-toggle-row">
+                  <button class="category-toggle">
+                    <span>Sweet</span>
+                    <span class="category-meta">
+                      <span>0/3</span>
+                      <span class="category-chevron">▸</span>
+                    </span>
+                  </button>
+                  <button class="category-select-btn" title="Select all">+</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Max Calories slider -->
+          <div class="filter-section">
+            <label class="slider-label" for="wf-calories">Maximum Calories:</label>
+            <input type="range" id="wf-calories" min="0" max="2200" value="1200"
+                   oninput="document.getElementById('cal-val').textContent = this.value + ' kcal'" />
+            <div class="slider-value" id="cal-val">1200 kcal</div>
+          </div>
+
+          <!-- Max Cooking Time slider -->
+          <div class="filter-section">
+            <label class="slider-label" for="wf-time">Maximum Cooking Time (min):</label>
+            <input type="range" id="wf-time" min="0" max="180" value="45"
+                   oninput="document.getElementById('time-val').textContent = this.value + ' min'" />
+            <div class="slider-value" id="time-val">45 min</div>
+          </div>
+        </aside>
+
+        <!-- Cards -->
+        <main class="cards">
+
+          <div class="recipe-card">
+            <div class="recipe-image-wrapper"></div>
+            <div class="recipe-body">
+              <div class="recipe-header">
+                <h5 class="recipe-title">Omelette</h5>
+                <div class="popup-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleMenu(this)">⋮</button>
+                  <div class="popup-menu" style="display:none;">
+                    <button class="popup-menu-item">Edit</button>
+                    <button class="popup-menu-item danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+              <div class="recipe-meta">
+                <span class="meta-pill">640 kcal</span>
+                <span class="meta-pill">4 portions</span>
+                <span class="meta-pill">15 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="recipe-card">
+            <div class="recipe-image-wrapper"></div>
+            <div class="recipe-body">
+              <div class="recipe-header">
+                <h5 class="recipe-title">Mushed Potatoes</h5>
+                <div class="popup-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleMenu(this)">⋮</button>
+                  <div class="popup-menu" style="display:none;">
+                    <button class="popup-menu-item">Edit</button>
+                    <button class="popup-menu-item danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+              <div class="recipe-meta">
+                <span class="meta-pill">420 kcal</span>
+                <span class="meta-pill">3 portions</span>
+                <span class="meta-pill">30 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="recipe-card">
+            <div class="recipe-image-wrapper"></div>
+            <div class="recipe-body">
+              <div class="recipe-header">
+                <h5 class="recipe-title">Cauliflower Meatballs</h5>
+                <div class="popup-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleMenu(this)">⋮</button>
+                  <div class="popup-menu" style="display:none;">
+                    <button class="popup-menu-item">Edit</button>
+                    <button class="popup-menu-item danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+              <div class="recipe-meta">
+                <span class="meta-pill">510 kcal</span>
+                <span class="meta-pill">2 portions</span>
+                <span class="meta-pill">45 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="recipe-card">
+            <div class="recipe-image-wrapper"></div>
+            <div class="recipe-body">
+              <div class="recipe-header">
+                <h5 class="recipe-title">Pancakes</h5>
+                <div class="popup-menu-wrapper">
+                  <button class="menu-btn" onclick="toggleMenu(this)">⋮</button>
+                  <div class="popup-menu" style="display:none;">
+                    <button class="popup-menu-item">Edit</button>
+                    <button class="popup-menu-item danger">Delete</button>
+                  </div>
+                </div>
+              </div>
+              <div class="recipe-meta">
+                <span class="meta-pill">520 kcal</span>
+                <span class="meta-pill">2 portions</span>
+                <span class="meta-pill">20 min</span>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SCREEN 2 · Recipe Detail (view mode)
+    ══════════════════════════════════════════ -->
+    <div id="screen-detail" class="screen">
+
+      <div class="topbar">
+        <button class="topbar-logo">Lentern</button>
+        <div class="topbar-actions">
+          <button class="btn btn-secondary">Edit</button>
+          <button class="btn btn-danger">Delete</button>
+        </div>
+      </div>
+
+      <div class="detail-page">
+        <div class="detail-card">
+
+          <div class="hero-image"></div>
+
+          <div class="detail-title-row">
+            <div>
+              <h1 class="detail-title">Omelette</h1>
+              <div class="pill-row">
+                <span class="pill">640 kcal</span>
+                <span class="pill">4 portions</span>
+                <span class="pill">15 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="section-box">
+              <h3>Ingredients</h3>
+              <ul class="ingredient-list">
+                <li>3 eggs</li>
+                <li>1 pinch salt</li>
+                <li>1 pinch pepper</li>
+                <li>1 tbsp butter</li>
+              </ul>
+            </div>
+            <div class="section-box">
+              <h3>Steps</h3>
+              <p class="steps-text">
+                1. Beat the eggs in a bowl with salt and pepper.<br>
+                2. Melt butter in a pan over medium heat.<br>
+                3. Pour in the egg mixture and let it set on the bottom.<br>
+                4. Fold in half and slide onto a plate. Serve hot.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SCREEN 3 · Create Recipe
+    ══════════════════════════════════════════ -->
+    <div id="screen-create" class="screen">
+
+      <div class="topbar">
+        <button class="topbar-logo">Lentern</button>
+      </div>
+
+      <div class="form-page">
+        <div class="form-card">
+          <h2 class="form-page-title">Create recipe</h2>
+
+          <div class="field">
+            <label>Title</label>
+            <input class="input" placeholder="e.g. Omelette" />
+          </div>
+
+          <div class="field">
+            <label>Image URL</label>
+            <input class="input" placeholder="/recipe_images/my-dish.jpg" />
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Calories</label>
+              <input class="input" type="number" placeholder="0" />
+            </div>
+            <div class="field">
+              <label>Portions</label>
+              <input class="input" type="number" placeholder="1" />
+            </div>
+            <div class="field">
+              <label>Time (min)</label>
+              <input class="input" type="number" placeholder="0" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Ingredients</label>
+            <textarea class="textarea" placeholder="Enter one ingredient per line, e.g. 2 tbsp sugar"></textarea>
+          </div>
+
+          <div class="field">
+            <label>Steps</label>
+            <textarea class="textarea" placeholder="Describe the cooking steps..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Create recipe</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         SCREEN 4 · Edit Recipe (pre-filled)
+    ══════════════════════════════════════════ -->
+    <div id="screen-edit" class="screen">
+
+      <div class="topbar">
+        <button class="topbar-logo">Lentern</button>
+      </div>
+
+      <div class="form-page">
+        <div class="form-card">
+          <h2 class="form-page-title">Edit recipe</h2>
+
+          <div class="field">
+            <label>Title</label>
+            <input class="input" value="Omelette" />
+          </div>
+
+          <div class="field">
+            <label>Image URL</label>
+            <input class="input" value="/recipe_images/omelette-without-eggs.jpg" />
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label>Calories</label>
+              <input class="input" type="number" value="640" />
+            </div>
+            <div class="field">
+              <label>Portions</label>
+              <input class="input" type="number" value="4" />
+            </div>
+            <div class="field">
+              <label>Time (min)</label>
+              <input class="input" type="number" value="15" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Ingredients</label>
+            <textarea class="textarea">3 eggs
+1 pinch salt
+1 pinch pepper
+1 tbsp butter</textarea>
+          </div>
+
+          <div class="field">
+            <label>Steps</label>
+            <textarea class="textarea">1. Beat the eggs in a bowl with salt and pepper.
+2. Melt butter in a pan over medium heat.
+3. Pour in the egg mixture and let it set on the bottom.
+4. Fold in half and slide onto a plate. Serve hot.</textarea>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showScreen(name, tabEl) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('visible'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('screen-' + name).classList.add('visible');
+        tabEl.classList.add('active');
+      }
+
+      function toggleMenu(btn) {
+        const menu = btn.nextElementSibling;
+        const isOpen = menu.style.display === 'block';
+        // Close all other menus first
+        document.querySelectorAll('.popup-menu').forEach(m => m.style.display = 'none');
+        menu.style.display = isOpen ? 'none' : 'block';
+      }
+
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.popup-menu-wrapper')) {
+          document.querySelectorAll('.popup-menu').forEach(m => m.style.display = 'none');
+        }
+      });
+    </script>
+  </body>
+</html>

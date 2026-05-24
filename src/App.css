@@ -703,3 +703,63 @@ body {
 .newRecipeActions button:last-child:hover {
   background: var(--brown);
 }
+
+.ingredientEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ingredientEditorRow {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(110px, 1fr) minmax(130px, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.ingredientEditorInput,
+.ingredientEditorSelect {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--brown);
+  background: var(--surface);
+}
+
+.ingredientEditorAmount {
+  min-width: 110px;
+}
+
+.ingredientEditorAddBtn,
+.ingredientEditorRemoveBtn {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ingredientEditorAddBtn {
+  align-self: flex-start;
+  background: var(--cream);
+  color: var(--brown);
+}
+
+.ingredientEditorRemoveBtn {
+  background: rgba(255, 154, 154, 0.9);
+  color: var(--brown);
+}
+
+@media (max-width: 720px) {
+  .ingredientEditorRow {
+    grid-template-columns: 1fr;
+  }
+
+  .ingredientEditorAddBtn,
+  .ingredientEditorRemoveBtn {
+    width: 100%;
+  }
+}

@@ -5,8 +5,14 @@ import { useEffect, useMemo, useState } from "react";
 import {
   buildIngredientsFromForm,
   formatIngredientDisplay,
-  serializeIngredients,
+  knownMeasures,
 } from "../utils/ingredientHelpers";
+
+const createEmptyIngredient = () => ({
+  name: "",
+  amount: "",
+  measure: "",
+});
 
 const emptyForm = {
   title: "",
@@ -14,7 +20,7 @@ const emptyForm = {
   calories: 0,
   portions: 1,
   time: 0,
-  ingredients: "",
+  ingredients: [createEmptyIngredient()],
   steps: "",
 };
 
@@ -45,13 +51,15 @@ export default function RecipePage() {
     }
 
     if (recipe) {
+      const formIngredients = buildIngredientsFromForm(recipe.ingredients);
+
       setForm({
         title: recipe.title || "",
         image: recipe.image || "",
         calories: recipe.calories ?? 0,
         portions: recipe.portions ?? 1,
         time: recipe.time ?? 0,
-        ingredients: serializeIngredients(recipe.ingredients),
+        ingredients: formIngredients.length > 0 ? formIngredients : [createEmptyIngredient()],
         steps: recipe.steps || "",
       });
     }
@@ -91,6 +99,38 @@ export default function RecipePage() {
     const returnTo = location.state?.from || (isEditRecipe ? `/recipe/${recipe.id}` : "/");
 
     navigate(returnTo, { replace: true });
+  };
+
+  const handleIngredientChange = (index, field, value) => {
+    setForm((current) => ({
+      ...current,
+      ingredients: current.ingredients.map((ingredient, ingredientIndex) =>
+        ingredientIndex === index
+          ? {
+              ...ingredient,
+              [field]: value,
+            }
+          : ingredient
+      ),
+    }));
+  };
+
+  const handleAddIngredient = () => {
+    setForm((current) => ({
+      ...current,
+      ingredients: [...current.ingredients, createEmptyIngredient()],
+    }));
+  };
+
+  const handleRemoveIngredient = (index) => {
+    setForm((current) => {
+      const nextIngredients = current.ingredients.filter((_, ingredientIndex) => ingredientIndex !== index);
+
+      return {
+        ...current,
+        ingredients: nextIngredients.length > 0 ? nextIngredients : [createEmptyIngredient()],
+      };
+    });
   };
 
   const pageTitle = isEditRecipe ? "Edit recipe" : isNewRecipe ? "Create recipe" : "Recipe";
@@ -156,15 +196,52 @@ export default function RecipePage() {
             </label>
           </div>
 
-          <label className="newRecipeField">
+          <div className="newRecipeField">
             <span>Ingredients</span>
-            <textarea
-              rows="6"
-              value={form.ingredients}
-              onChange={(e) => handleFieldChange("ingredients", e.target.value)}
-              placeholder="Enter one ingredient per line, for example: 2 tbsp sugar"
-            />
-          </label>
+            <div className="ingredientEditor">
+              {form.ingredients.map((ingredient, index) => (
+                <div className="ingredientEditorRow" key={`${ingredient.name}-${index}`}>
+                  <input
+                    type="text"
+                    className="ingredientEditorInput"
+                    placeholder="Ingredient"
+                    value={ingredient.name}
+                    onChange={(event) => handleIngredientChange(index, "name", event.target.value)}
+                  />
+                  <input
+                    type="text"
+                    className="ingredientEditorInput ingredientEditorAmount"
+                    placeholder="Amount"
+                    value={ingredient.amount}
+                    onChange={(event) => handleIngredientChange(index, "amount", event.target.value)}
+                  />
+                  <select
+                    className="ingredientEditorSelect"
+                    value={ingredient.measure}
+                    onChange={(event) => handleIngredientChange(index, "measure", event.target.value)}
+                  >
+                    <option value="">Measure</option>
+                    {knownMeasures.map((measure) => (
+                      <option key={measure} value={measure}>
+                        {measure}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    className="ingredientEditorRemoveBtn"
+                    onClick={() => handleRemoveIngredient(index)}
+                    aria-label={`Remove ingredient ${index + 1}`}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+              <button type="button" className="ingredientEditorAddBtn" onClick={handleAddIngredient}>
+                + Add ingredient
+              </button>
+            </div>
+          </div>
 
           <label className="newRecipeField">
             <span>Steps</span>

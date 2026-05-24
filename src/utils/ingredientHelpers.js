@@ -1,4 +1,4 @@
-const knownMeasures = [
+export const knownMeasures = [
   "tbsp",
   "tsp",
   "cup",
@@ -133,7 +133,35 @@ export function parseIngredientLine(line) {
   };
 }
 
-export function buildIngredientsFromForm(value = "") {
+export function buildIngredientsFromForm(value = []) {
+  if (Array.isArray(value)) {
+    return value
+      .map((ingredient) => {
+        if (!ingredient) {
+          return null;
+        }
+
+        if (typeof ingredient === "string") {
+          return parseIngredientLine(ingredient);
+        }
+
+        const name = ingredient.name?.trim() || "";
+
+        if (!name && !ingredient.amount && !ingredient.measure) {
+          return null;
+        }
+
+        return {
+          name,
+          amount: ingredient.amount === undefined || ingredient.amount === null
+            ? ""
+            : String(ingredient.amount).trim(),
+          measure: ingredient.measure?.trim() || "",
+        };
+      })
+      .filter(Boolean);
+  }
+
   return value
     .split("\n")
     .map(parseIngredientLine)
