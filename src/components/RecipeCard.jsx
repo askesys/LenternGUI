@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecipes } from "../context/RecipeContext";
+import ConfirmDialog from "./ConfirmDialog";
 
 export default function RecipeCard({ recipe }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { deleteRecipe } = useRecipes();
   const [showMenu, setShowMenu] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -25,6 +27,17 @@ export default function RecipeCard({ recipe }) {
   };
 
   return (
+    <>
+    {showConfirm && (
+      <ConfirmDialog
+        message="Are you sure you want to delete this recipe?"
+        onConfirm={() => {
+          setShowConfirm(false);
+          deleteRecipe(recipe.id);
+        }}
+        onCancel={() => setShowConfirm(false)}
+      />
+    )}
     <div className="recipe-card-modern" onClick={handleCardClick}>
 
       <div className="recipe-image-wrapper">
@@ -70,7 +83,7 @@ export default function RecipeCard({ recipe }) {
                   onClick={(event) => {
                     event.stopPropagation();
                     setShowMenu(false);
-                    deleteRecipe(recipe.id);
+                    setShowConfirm(true);
                   }}
                 >
                   Delete
@@ -87,5 +100,6 @@ export default function RecipeCard({ recipe }) {
         </div>
       </div>
     </div>
+    </>
   );
 }

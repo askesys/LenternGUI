@@ -1,6 +1,7 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useRecipes } from "../context/RecipeContext";
 import TopBar from "../components/TopBar";
+import ConfirmDialog from "../components/ConfirmDialog";
 import { useEffect, useMemo, useState } from "react";
 import {
   buildIngredientsFromForm,
@@ -43,6 +44,7 @@ export default function RecipePage() {
   );
 
   const [form, setForm] = useState(emptyForm);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     if (isNewRecipe) {
@@ -200,7 +202,7 @@ export default function RecipePage() {
             <span>Ingredients</span>
             <div className="ingredientEditor">
               {form.ingredients.map((ingredient, index) => (
-                <div className="ingredientEditorRow" key={`${ingredient.name}-${index}`}>
+                <div className="ingredientEditorRow" key={index}>
                   <input
                     type="text"
                     className="ingredientEditorInput"
@@ -268,6 +270,17 @@ export default function RecipePage() {
 
   return (
     <>
+      {showConfirm && (
+        <ConfirmDialog
+          message="Are you sure you want to delete this recipe?"
+          onConfirm={() => {
+            setShowConfirm(false);
+            deleteRecipe(recipe.id);
+            navigate("/");
+          }}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
       <TopBar
         showSearch={false}
         showAdd={false}
@@ -288,10 +301,7 @@ export default function RecipePage() {
             <button
               type="button"
               className="topbar-action-btn danger"
-              onClick={() => {
-                deleteRecipe(recipe.id);
-                navigate("/");
-              }}
+              onClick={() => setShowConfirm(true)}
             >
               Delete
             </button>
