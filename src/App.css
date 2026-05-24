@@ -10,19 +10,11 @@
   --shadow: 0 22px 56px rgba(94, 80, 52, 0.12), 0 1px 2px rgba(94, 80, 52, 0.06);
 }
 
-/* =======================
-   GLOBAL LAYOUT
-======================= */
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(180deg, var(--cream-soft) 0%, #ffe8c8 100%);
 }
-
-/* =======================
-   TOP BAR
-======================= */
 
 .topbar {
   display: flex;
@@ -100,20 +92,12 @@ body {
   background: var(--green);
 }
 
-/* =======================
-   MAIN WRAPPER (SIDEBAR + CONTENT)
-======================= */
-
 .wrapper {
   display: flex;
   gap: 20px;
   padding: 20px;
   align-items: flex-start;
 }
-
-/* =======================
-   FILTERS (LEFT SIDEBAR)
-======================= */
 
 .filtersBlock {
   width: 250px;
@@ -328,20 +312,12 @@ body {
   transform: translateY(-1px);
 }
 
-/* =======================
-   CARDS GRID
-======================= */
-
 .cardsBlock {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 18px;
 }
-
-/* =======================
-   RECIPE CARD
-======================= */
 
 .recipe-card-modern {
   background: var(--surface);
@@ -357,7 +333,6 @@ body {
   box-shadow: 0 28px 48px rgba(94, 80, 52, 0.14), 0 1px 2px rgba(94, 80, 52, 0.08);
 }
 
-/* IMAGE */
 .recipe-image-wrapper img {
   width: 100%;
   height: 150px;
@@ -365,12 +340,10 @@ body {
   cursor: pointer;
 }
 
-/* BODY */
 .recipe-body {
   padding: 12px 14px;
 }
 
-/* HEADER (title + menu) */
 .recipe-header {
   display: flex;
   justify-content: space-between;
@@ -383,7 +356,6 @@ body {
   color: var(--brown);
 }
 
-/* METADATA */
 .recipe-meta {
   display: flex;
   justify-content: space-between;
@@ -392,7 +364,6 @@ body {
   color: var(--brown);
 }
 
-/* MENU BUTTON */
 .popup-menu-wrapper {
   position: relative;
 }
@@ -446,10 +417,6 @@ body {
   color: var(--brown);
 }
 
-/* =======================
-   INFO ROW
-======================= */
-
 .recipe_info {
   display: flex;
   justify-content: space-around;
@@ -469,10 +436,6 @@ body {
   height: 14px;
   object-fit: contain;
 }
-
-/* =======================
-   RECIPE PAGE
-======================= */
 
 .recipePage {
   padding: 30px;
@@ -764,10 +727,6 @@ body {
   background: rgba(255, 154, 154, 0.9);
   color: var(--brown);
 }
-
-/* =======================
-   CONFIRM DIALOG
-======================= */
 
 .confirm-overlay {
   position: fixed;
